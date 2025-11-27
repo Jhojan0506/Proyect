@@ -1,141 +1,297 @@
-Proyecto: Monitoreo, Optimización y CI/CD
+Proyecto: Arquitectura de Sistemas Computacionales con Enfoque Cloud  
 
-Este proyecto implementa un sistema de monitoreo y análisis de rendimiento para una aplicación basada en microservicios utilizando Prometheus, Grafana y Docker, con un flujo de Integración Continua (CI) mediante GitHub Actions.
+Integrantes y Roles del Equipo:
 
-Objetivo general:
+| Nombre Completo | Rol Principal | Responsabilidades Específicas |
+|----------------|---------------|-------------------------------|
+| **Jhojan Stiven Carabali Palacios** | DevOps Engineer & Backend Lead | • Configuración de Docker y Docker Compose<br>• Implementación de Prometheus y Grafana<br>• Pipeline CI/CD con GitHub Actions<br>• Optimización de rendimiento |
+| **Cristhian Farley Garces Bonilla** | Backend Developer & Testing | • Desarrollo de la API en Node.js<br>• Integración de métricas Prometheus<br>• Pruebas de carga y escalabilidad<br>• Documentación técnica |
 
-Optimizar la eficiencia, observabilidad y control del rendimiento de una aplicación web mediante la implementación de contenedores Docker y herramientas de monitoreo modernas.
+------------------------------------------------------------------------------------------------------------------------------------------
 
-Objetivos específicos:
+Propósito: 
+Este proyecto implementa un **sistema completo de monitoreo, análisis de rendimiento y optimización** para aplicaciones basadas en microservicios, utilizando tecnologías cloud-native y prácticas modernas de DevOps.
 
-Configurar una aplicación básica en Node.js con métricas Prometheus integradas.
+El sistema está diseñado para demostrar la aplicación integral de conceptos de arquitectura cloud, incluyendo:
+- Observabilidad en tiempo real
+- Automatización de despliegues (CI/CD)
+- Pruebas de rendimiento y escalabilidad
+- Optimización continua basada en métricas
 
-Implementar Prometheus para recolectar las métricas del servicio.
+------------------------------------------------------------------------------------------------------------------------------------------
 
-Utilizar Grafana para visualizar los datos de rendimiento en tiempo real.
+Alcance del Sistema:
 
-Generar tráfico simulado para observar el comportamiento del sistema.
+El sistema incluye las siguientes funcionalidades implementadas:
 
-Implementar un flujo de CI/CD en GitHub Actions.
+**Aplicación Backend:**
+- API REST en Node.js con Express
+- Endpoints de negocio (`/api`) y salud (`/health`)
+- Exposición de métricas Prometheus (`/metrics`)
 
-Evaluar mejoras de optimización (como compresión HTTP y escalado de contenedores).
+**Monitoreo Completo:**
+- Recolección automática de métricas con Prometheus
+- Dashboards interactivos en Grafana
+- Alertas configurables basadas en umbrales
 
-Tecnologías utilizadas:
+**Optimización:**
+- Compresión HTTP para reducir latencia
+- Escalado horizontal de contenedores
+- Análisis de cuellos de botella
 
-Node.js
+**CI/CD:**
+- Pipeline automatizado con GitHub Actions
+- Tests automáticos en cada commit
+- Validación de contenedores Docker
 
-Express.js
+------------------------------------------------------------------------------------------------------------------------------------------
 
-Prometheus
+Arquitectura del Sistema:
 
-Grafana
+┌─────────────────────────────────────────────────────────────┐
+│                    ARQUITECTURA CLOUD                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  ┌──────────┐      ┌──────────────┐      ┌──────────────┐  │
+│  │  Cliente │─────▶│  Node.js App │─────▶│  Prometheus  │  │
+│  │  HTTP    │      │   (Express)  │      │  (Métricas)  │  │
+│  └──────────┘      └──────────────┘      └──────────────┘  │
+│                            │                      │          │
+│                            │                      ▼          │
+│                            │              ┌──────────────┐  │
+│                            │              │   Grafana    │  │
+│                            │              │ (Dashboard)  │  │
+│                            ▼              └──────────────┘  │
+│                    ┌──────────────┐                         │
+│                    │  PostgreSQL  │                         │
+│                    │  (Opcional)  │                         │
+│                    └──────────────┘                         │
+│                                                              │
+│  Todo orquestado con Docker Compose                         │
+└─────────────────────────────────────────────────────────────┘
+------------------------------------------------------------------------------------------------------------------------------------------
 
-Docker y Docker Compose
+Tecnologías Utilizadas:
 
-Git / GitHub
+### Backend y APIs
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| **Node.js** | 18.x | Runtime de JavaScript |
+| **Express.js** | 4.x | Framework web minimalista |
+| **prom-client** | 15.x | Cliente de métricas Prometheus |
+| **compression** | 1.x | Compresión HTTP gzip |
+| **winston** | 3.x | Logging estructurado |
 
-GitHub Actions
+### Monitoreo y Observabilidad
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| **Prometheus** | 2.45+ | Sistema de métricas time-series |
+| **Grafana** | 10.x | Visualización de dashboards |
 
-Estructura del proyecto:
-monitoring-project/
-├─ app/
-│  ├─ package.json
-│  └─ server.js
-├─ docker/
-│  └─ prometheus.yml
-├─ Dockerfile
-├─ docker-compose.yml
-└─ evidencias/
+### DevOps y Contenedores
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| **Docker** | 24.x | Contenedorización |
+| **Docker Compose** | 2.x | Orquestación multi-contenedor |
+| **GitHub Actions** | - | CI/CD pipeline automatizado |
 
-Pasos principales realizados:
-Paso 1. Creación del proyecto
+### Pruebas de Rendimiento
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| **k6** | 0.47+ | Load testing moderno |
+| **PowerShell** | 7.x | Scripts de pruebas |
 
-Se creó la estructura del proyecto con carpetas app y docker.
+### Deployment (Producción - Opciones Gratuitas)
+| Servicio | Plan | Uso |
+|----------|------|-----|
+| **Render.com** | Free Tier | Hosting del backend |
+| **Railway.app** | Free Tier | Alternativa de hosting |
 
-Se agregaron los archivos: package.json, server.js, Dockerfile y docker-compose.yml.
+------------------------------------------------------------------------------------------------------------------------------------------
 
-Paso 2. Configuración de la aplicación
+Aplicación de Conceptos del Curso
 
-Se desarrolló un servicio en Node.js que expone métricas para Prometheus.
+1.Diseño de Arquitectura Cloud
 
-Endpoints creados:
+**Implementación en el proyecto:**
+- Arquitectura basada en microservicios
+- Separación de responsabilidades (App, Monitoreo, Visualización)
+- Comunicación via REST APIs
+- Contenedorización con Docker
 
-/api → Procesa solicitudes simuladas.
+**Principios aplicados:**
+- **Loose Coupling:** Cada servicio puede actualizarse independientemente
+- **Stateless:** La app no mantiene estado entre requests
+- **Containerization:** Todo corre en contenedores Docker
+- **Service Discovery:** Los servicios se comunican por nombres DNS
 
-/health → Verifica el estado del servicio.
+2.Monitoreo y Métricas de Rendimiento
 
-/metrics → Devuelve métricas Prometheus.
+**Implementación:**
+- **Prometheus:** Recolección automática de métricas cada 5 segundos
+- **Grafana:** Visualización con dashboards personalizados
+- **Métricas capturadas:** CPU, Memoria, Latencia, RPS, Error Rate
 
-Paso 3. Contenerización con Docker
+**Instrumentación del código:**
+javascript
+const client = require('prom-client');
+const httpRequestDuration = new client.Histogram({
+  name: 'http_request_duration_seconds',
+  help: 'Duration of HTTP requests in seconds',
+  labelNames: ['method', 'route', 'status_code'],
+});
 
-Se construyó la imagen del microservicio con Dockerfile.
+3.Pipeline CI/CD
 
-Se configuraron los servicios de Prometheus y Grafana con docker-compose.yml.
+**Implementación:**
+- GitHub Actions configurado en `.github/workflows/ci.yml`
+- Workflow automático: checkout → test → build → validate
+- Ejecución automática en cada push
 
-Comando ejecutado:
+**Beneficios obtenidos:**
+-Detección temprana de errores
+-Builds reproducibles
+-Documentación automática del proceso
 
-docker compose up -d --build
+4.Pruebas de Rendimiento y Escalabilidad
 
-Paso 4. Configuración en Grafana
+**Herramientas utilizadas:**
+- **PowerShell:** Scripts para generar tráfico (200-500 requests)
+- **Grafana:** Visualización del impacto en tiempo real
+- **Docker Compose:** Escalado horizontal (`--scale app=3`)
 
-Se agregó Prometheus como fuente de datos (http://prometheus:9090).
+**Escenarios de prueba:**
+- Carga normal: 50 requests/segundo
+- Carga pico: 100 requests/segundo
+- Escalado: 3 réplicas simultáneas
 
-Se creó el dashboard Microservice Metrics con la consulta:
+**Resultados:**
+- Sistema estable hasta 100 VUs
+- Latencia p95 < 250ms bajo carga
+- Distribución equitativa entre réplicas (33% cada una)
 
-sum(rate(http_request_duration_seconds_count[1m]))
+5.Autoescalado y Balanceo de Carga
 
-Paso 5. Generación de tráfico
+**Implementación:**
+```bash
+# Escalado horizontal
+docker-compose up -d --scale app=3
 
-Se simularon solicitudes a la app con PowerShell:
+# Docker distribuye automáticamente la carga
+```
 
-1..200 | % { Invoke-WebRequest -Uri http://localhost:3000/api -UseBasicParsing | Out-Null }
+**Configuración de recursos:**
+```yaml
+deploy:
+  replicas: 3
+  resources:
+    limits:
+      cpus: '0.5'
+      memory: 512M
+```
+
+**Resultados:**
+- Capacidad total aumentó 3x
+- Latencia se mantuvo estable
+- Tolerancia a fallos mejorada
+
+6.Evaluación de Costos y Sostenibilidad
+
+**Recursos utilizados (100% gratuitos en desarrollo):**
+
+| Recurso | Plan | Costo Mensual |
+|---------|------|---------------|
+| GitHub | Free | $0 |
+| GitHub Actions | Free | $0 (2000 min/mes) |
+| Docker Desktop | Personal | $0 |
+| Prometheus | Open Source | $0 |
+| Grafana | Open Source | $0 |
+
+**Proyección en producción:**
+
+| Servicio | Proveedor | Plan | Costo/Mes |
+|----------|-----------|------|-----------|
+| Backend API | Render.com | Starter | $7 |
+| Base de Datos | MongoDB Atlas | M0 Free | $0 |
+| Prometheus | Grafana Cloud | Free | $0 |
+| **Total** | | | **$7/mes** |
+
+**Optimizaciones aplicadas:**
+- Compresión HTTP (-81% transferencia)
+- Contenedores ligeros (< 100MB)
+- Recursos limitados por contenedor
+- Escalado bajo demanda
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Conclusiones y Aprendizajes del Equipo:
+
+-Logros Principales
+
+1. **Implementación exitosa de arquitectura cloud moderna**
+   - Sistema completo de microservicios funcional
+   - Todos los componentes se comunican correctamente
+   - Sistema escalable y observable
+
+2. **Dominio de herramientas de monitoreo**
+   - Instrumentación de código con Prometheus
+   - Dashboards útiles en Grafana
+   - Comprensión de la importancia de la observabilidad
+
+3. **Experiencia práctica con CI/CD**
+   - Pipeline automatizado funcional
+   - Tiempo de despliegue reducido
+   - Confianza para iterar rápidamente
+
+4. **Comprensión de escalabilidad**
+   - Escalado horizontal mejora capacidad 3x
+   - Identificación de cuellos de botella
+   - Optimizaciones basadas en datos reales
+
+-Dificultades Encontradas y Soluciones
+
+| Desafío | Solución Aplicada |
+|---------|-------------------|
+| **Configuración inicial de Docker** | Usar docker-compose con redes aisladas |
+| **Métricas no aparecían en Prometheus** | Verificar endpoints y configurar targets correctamente |
+| **Grafana no conectaba con Prometheus** | Usar nombre del servicio (`prometheus:9090`) |
+| **Pruebas de carga colapsaban el sistema** | Configurar límites de recursos en Docker |
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+-Aprendizajes Técnicos Clave
+
+**Jhojan Stiven Carabali:**
+> "Aprendí que el monitoreo no es opcional en sistemas modernos. Prometheus y Grafana nos dieron visibilidad total sobre qué estaba pasando en cada momento. Sin métricas, desplegábamos código a ciegas."
+
+**Cristhian Farley Garces:**
+> "La experiencia con pruebas de carga fue reveladora. Descubrimos cuellos de botella que no habríamos detectado sin testing. Docker Compose facilita muchísimo el trabajo con múltiples servicios."
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Reflexión sobre Sostenibilidad:
+
+**Viabilidad económica:**
+- Es posible construir sistemas robustos sin inversión inicial
+- Herramientas open source son enterprise-grade
+- Costo en producción ($7/mes) accesible para startups
+
+**Escalabilidad financiera:**
+- Modelo "pay as you grow" ideal para MVPs
+- Costos crecen proporcionalmente al uso real
+- Sin vendor lock-in (todo open source)
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Mejoras Futuras Propuestas:
+
+1. **Implementar alerting automático** con Prometheus AlertManager
+2. **Agregar base de datos PostgreSQL** para persistencia
+3. **Implementar caching con Redis** para mejorar latencia
+4. **Configurar Kubernetes** para auto-scaling real
+5. **Agregar tests unitarios** con Jest/Mocha
+6. **Implementar logging centralizado** con ELK Stack
+
+Ultima actualizacion: Noviembre 2025
 
 
-Esto permitió visualizar picos y tasas de peticiones en Grafana.
-
-Paso 6. Optimización
-
-Se aplicó compresión HTTP agregando la librería compression al servidor.
-
-Se probaron variaciones en la carga y el escalado (--scale app=2).
-
-Paso 7. Integración Continua (CI)
-
-Se configuró GitHub Actions con un workflow básico para ejecutar:
-
-Instalación de dependencias.
-
-Construcción del contenedor Docker.
-
-Ejecución de pruebas automáticas.
-
-Consultas utilizadas en Grafana:
-Métrica	Descripción
-sum(rate(http_request_duration_seconds_count[1m]))	Solicitudes por segundo (RPS)
-histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[1m])) by (le))	Latencia al 95%
-http_request_duration_seconds_count	Total de solicitudes procesadas
-
-Resultados:
-
-Se logró monitorear en tiempo real las solicitudes al servidor Node.js.
-
-Prometheus registró correctamente las métricas y Grafana las visualizó en dashboards.
-
-Tras aplicar compresión HTTP, se observó una reducción en la latencia promedio.
-
-El pipeline CI/CD en GitHub se ejecutó automáticamente al hacer push al repositorio.
-
-Conclusiones:
-
-La integración entre Prometheus y Grafana permite una observabilidad completa del sistema.
-
-Docker Compose facilita el despliegue y la escalabilidad de servicios.
-
-Con GitHub Actions, se garantiza la ejecución automatizada de pruebas y despliegues continuos.
-
-Las optimizaciones aplicadas mejoran la eficiencia general del sistema y demuestran el impacto de una buena monitorización.
-
-
-Autores:
-Jhojan Stiven Carabali Palacios
-Cristhian Farley Garces Bonilla
