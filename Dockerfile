@@ -1,7 +1,9 @@
-FROM node:20-alpine
+FROM node:18-alpine
 WORKDIR /app
-COPY app/package*.json ./
-RUN npm install --omit=dev
-COPY app/ .
+COPY package*.json ./
+RUN npm install --production
+COPY . .
 EXPOSE 3000
+ENV NODE_ENV=production
+ENV PORT=3000
 CMD ["node", "server.js"]
