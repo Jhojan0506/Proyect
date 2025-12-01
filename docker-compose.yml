@@ -1,20 +1,79 @@
-version: "3.8"
 services:
+  # Microservicio de Órdenes (principal)
   app:
     build: .
     ports:
-      - "3000:3000"
-  prometheus:
-    image: prom/prometheus
+      - "57050-57052:3000"  
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/campgo_orders
+      - NODE_ENV=production
+      - PORT=3000
+    command: npm start
+    networks:
+      - campgo-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Base de datos MongoDB
+  mongo:
+    image: mongo:5.0
+    container_name: campgo-mongo
+    ports:
+      - "27017:27017"
     volumes:
-      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+      - mongo-data:/data/db
+    networks:
+      - campgo-network
+    restart: unless-stopped
+
+  # Prometheus para métricas
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: campgo-prometheus
     ports:
       - "9090:9090"
-    depends_on:
-      - app
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - campgo-network
+    restart: unless-stopped
+
+  # Grafana para visualización
   grafana:
-    image: grafana/grafana-oss
+    image: grafana/grafana:latest
+    container_name: campgo-grafana
     ports:
-      - "3001:3000"
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=
+    volumes:
+      - grafana-data:/var/lib/grafana
     depends_on:
       - prometheus
+    networks:
+      - campgo-network
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  campgo-network:
+    driver: bridge
